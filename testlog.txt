@@ -1,0 +1,64 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling serde_core v1.0.228
+   Compiling zmij v1.0.21
+   Compiling thiserror v2.0.18
+   Compiling serde_json v1.0.150
+   Compiling serde v1.0.228
+   Compiling memchr v2.8.1
+   Compiling itoa v1.0.18
+   Compiling byteorder v1.5.0
+   Compiling syn v2.0.117
+   Compiling thiserror-impl v2.0.18
+   Compiling serde_derive v1.0.228
+   Compiling causalworks v0.1.0 (/Users/lakshitbahl/Downloads/causalworks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.89s
+     Running unittests src/lib.rs (target/debug/deps/causalworks-0640b00a22fc4fce)
+
+running 30 tests
+test discovery::tests::percentile_never_below_min_or_above_max ... ok
+test discovery::tests::percentiles_suppressed_below_min_samples ... ok
+test discovery::tests::interarrival_uses_capture_timeline ... ok
+test discovery::tests::histogram_percentiles_bracket_known_distribution ... ok
+test discovery::tests::toggling_bits_detects_only_changed_bits ... ok
+test ingest::tests::fanuc_pose_decodes_le_floats ... ok
+test causal::tests::attributes_trip_to_amr_jitter ... ok
+test causal::tests::clean_trip_yields_no_false_catalyst ... ok
+test ingest::tests::short_frame_errors_not_panics ... ok
+test ingest::tests::parses_profinet_interlock_bit ... ok
+test manifest::tests::detects_cycle ... ok
+test manifest::tests::lints_tight_budget ... ok
+test manifest::tests::clean_manifest_lints_clean ... ok
+test manifest::tests::rejects_dangling_edge ... ok
+test manifest::tests::lints_unreachable_trip_node ... ok
+test manifest::tests::rejects_duplicate_node ... ok
+test manifest::tests::rejects_non_interlock_trip_node ... ok
+test manifest::tests::rejects_units_error_budget ... ok
+test replay::tests::detects_truncated_record_data ... ok
+test manifest::tests::rejects_zero_budget ... ok
+test replay::tests::reads_records_with_ns_timestamps ... ok
+test replay::tests::rejects_pcapng ... ok
+test manifest::tests::valid_manifest_builds ... ok
+test storage::tests::inmemory_rejects_duplicate_key ... ok
+test storage::tests::inmemory_range_is_chronological_and_half_open ... ok
+test stream::tests::counts_truncated_capture_records ... ok
+test stream::tests::streams_records_bounded ... ok
+test stream::tests::partial_trailing_record_is_clean_end_with_flag ... ok
+test trace::tests::unattributed_trip_is_flagged_for_fault_review ... ok
+test trace::tests::attributed_trace_round_trips_and_flags_iso ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/harness.rs (target/debug/deps/causalworks_harness-cc2fb7a87f7c1b24)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests causalworks
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

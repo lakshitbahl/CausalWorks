@@ -1,0 +1,57 @@
+[package]
+name = "causalworks"
+version = "0.1.0"
+edition = "2021"
+description = "Passive OT-layer causal-trace engine for multi-vendor automation cells"
+
+[dependencies]
+# Capture. The `pcap` crate wraps libpcap and yields a borrowed &[u8] per packet
+# (zero-copy parse). For true zero-copy *capture* at line rate, swap the
+# CaptureSource impl in module A for an AF_XDP-based one; the parsing layer is
+# deliberately decoupled from the capture mechanism so this swap is mechanical.
+# OPTIONAL: only needed for the live libpcap source, gated by `pcap-source`.
+pcap = { version = "2.2", optional = true }
+
+# Zero-dependency byte reading for fixed-layout fieldbus frames.
+byteorder = "1.5"
+
+# Serialization of completed causal traces (Module C). Protobuf is the better
+# wire format for a TimescaleDB/RocksDB pipeline at volume, but JSON is included
+# because it is human-auditable for the ISO 13849 evidence packages, where
+# auditability outranks density.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Ergonomic error types without pulling in anyhow's type erasure (we want
+# typed errors at module boundaries for a real-time system).
+thiserror = "2"
+
+# OPTIONAL: raw syscalls for the hardware-timestamp (SO_TIMESTAMPING) source.
+# Gated by `hw-capture` so the offline harness builds with no networking deps.
+libc = { version = "0.2", optional = true }
+
+# OPTIONAL: embedded persistent store for the edge appliance. Gated by
+# `rocksdb-sink` because it compiles a large C++ library; the in-memory sink
+# (always available) is used for the harness and CI.
+rocksdb = { version = "0.22", optional = true }
+
+[features]
+default = []
+pcap-source = ["dep:pcap"]
+hw-capture = ["dep:libc"]
+rocksdb-sink = ["dep:rocksdb"]
+
+[[bin]]
+name = "causalworks-harness"
+path = "src/bin/harness.rs"
+
+[profile.release]
+# Real-time middleware settings: panic=abort removes unwinding overhead and
+# landing pads; codegen-units=1 + LTO maximize inlining of the hot parse loop.
+# panic=abort also means a parse panic kills the process rather than leaving a
+# half-unwound capture thread — for a *passive* diagnostic appliance, failing
+# fast and restarting under a supervisor is the correct safety posture.
+panic = "abort"
+lto = "fat"
+codegen-units = 1
+opt-level = 3

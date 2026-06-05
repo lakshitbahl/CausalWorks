@@ -1,0 +1,12 @@
+{
+  "cell_name": "SI-pilot-cell-orphan-test",
+  "nodes": [
+    { "id": 1, "label": "amr_cmd_vel", "type": "ros2_port", "topic_port": 7400 },
+    { "id": 2, "label": "fanuc_predock_pose", "type": "fanuc_pose" },
+    { "id": 3, "label": "siemens_entry_interlock", "type": "profinet", "frame_id": 2, "bit_index": 0 }
+  ],
+  "edges": [
+    { "from": 1, "to": 2, "wcet_ns": 3000000 }
+  ],
+  "trip_node": 3
+}
