@@ -6,7 +6,7 @@ fixtures.
 It is a passive, offline diagnostic engine for industrial Ethernet timing faults. Given
 a packet capture of an automation cell, it reconstructs the cross-protocol
 sequence of events preceding a safety-interlock trip and attributes that trip to
-the upstream timing-budget (WCET) violation that most plausibly caused it — or
+the upstream timing-budget (WCET) violation that most plausibly caused it or
 reports that no budget was violated, in which case the trip is flagged as a
 probable functional fault rather than a timing one.
  
